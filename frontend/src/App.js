@@ -5,15 +5,31 @@ import LoginPage from "./pages/Authentication/LoginPage";
 import SignupPage from "./pages//Authentication/SignupPage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DonationForm from "./pages/DonationForm";
-
-
-const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
+import Admin from "./pages/Admin";
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  UserButton,
+  useUser,
+  RedirectToSignIn,
+} from "@clerk/clerk-react";
+const clerkPubKey = "pk_test_bGVnaWJsZS1tYWNhdy00Ni5jbGVyay5hY2NvdW50cy5kZXYk";
 
 function App() {
   return (
     <div className="App">
-      {/* <Route path="/" component={LoginPage} exact />
-      <Route path="/signup" component={SignupPage} exact /> */}
+      <ClerkProvider publishableKey={clerkPubKey}>
+      <SignedIn>
+      <Route path="/admin" component={Admin} exact />
+      </SignedIn>
+
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
+      
+      </ClerkProvider>
+      
       <Route path="/" component={HomePage} exact />
       <Route path="/donation" component={DonationForm} exact />
     </div>

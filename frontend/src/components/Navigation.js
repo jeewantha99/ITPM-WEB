@@ -3,6 +3,8 @@ import Navbar from 'react-bootstrap/Navbar';
 
 
 function Navigation() {
+
+  
   return (
     <div> <Navbar style={{backgroundColor:"#30C621",height:"80px"}}>
      
@@ -19,6 +21,8 @@ function Navigation() {
         <div class="text-warning" style={{fontSize:"20px",marginLeft:"80px",marginTop:"5px"}}>SMART CITY </div>
         <div class="text-light"style={{fontSize:"10px",marginLeft:"80px",marginTop:"2px"}}>Tree Donation Center </div>
       </Navbar.Brand>
+      
+
   
   </Navbar>
   </div>

@@ -7,19 +7,28 @@ import Card from 'react-bootstrap/Card';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import Select from '@mui/material/Select';
+
+
 
 
 
 const DonationForm =() =>{
-  const [Category, setCategory] = React.useState('');
+  const [NameOfDonator, setNameOfDonator] = React.useState();
+  const [NameOfPlant, setNameOfPlant] = React.useState();
+  const [Category, setCategory] = React.useState();
+  const [Quantity, setQuantity] = React.useState();
+  const [Address, setAddress] = React.useState();
+  const [ContactNumber, setContactNumber] = React.useState();
 
  
 const history = useHistory();
 
-  const homepage = async(e) => {
-    history.push("/");
-  }
+  // const homepage = async(e) => {
+  //   history.push("/");
+  // }
 
     const myStyle={
         backgroundImage: 
@@ -32,6 +41,123 @@ const history = useHistory();
         display: "flow-root"
         
     };
+
+
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+  
+      var isSuccess = true;
+  
+      
+  
+      if (!NameOfDonator) {
+        Swal.fire({
+          title: "Error!",
+          text: "Please enter Name of Donator !!!",
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "red",
+        });
+        isSuccess = false;
+      }
+  
+      if (!NameOfPlant) {
+        Swal.fire({
+          title: "Error!",
+          text: "Please enter Shop Name of Plant !!!",
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "red",
+        });
+        isSuccess = false;
+      }
+
+      if (!Category) {
+        Swal.fire({
+          title: "Error!",
+          text: "Please enter Shop Category !!!",
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "red",
+        });
+        isSuccess = false;
+      }
+      if (!Quantity) {
+        Swal.fire({
+          title: "Error!",
+          text: "Please enter Quantity !!!",
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "red",
+        });
+        isSuccess = false;
+      }
+
+      if (!Address) {
+        Swal.fire({
+          title: "Error!",
+          text: "Please enter Address !!!",
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "red",
+        });
+        isSuccess = false;
+      }
+
+      if (!ContactNumber) {
+        Swal.fire({
+          title: "Error!",
+          text: "Please enter ContactNumber !!!",
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "red",
+        });
+        isSuccess = false;
+      }
+  
+      if (isSuccess ) {
+        // try {
+        //   const config = {
+        //     headers: {
+        //       "Content-type": "application/json",
+        //     },
+        //   };
+        //   const { data } = await axios.post(
+        //     "http://localhost:5000/api/shop/registerShop",
+        //     {
+        //       NameOfDonator,
+        //       NameOfPlant,
+        //       Category,
+        //       Quantity,
+        //       Address,
+        //       ContactNumber,
+        //     },
+  
+        //     config
+        //   );
+        //   console.log(data);
+  
+  
+          Swal.fire({
+            title: "success",
+            text: "Submitted Successfully",
+            icon: "success",
+            confirmButtonText: "Close",
+          });
+          history.push("/");
+        // } catch (error) {
+        //   Swal.fire({
+        //     icon: "error",
+        //     title: "Oops...",
+        //     text: error.response.data.error,
+        //     footer: '<a href="">Why do I have this issue?</a>',
+        //   });
+  
+        //   console.log(`Error occured ${error.response.data.message}`);
+        //   console.log(error.response);
+        // }
+      }
+    }
  
   return (
   <div style={myStyle} > 
@@ -48,9 +174,11 @@ const history = useHistory();
       }}
     >
     
-      <TextField sx={{marginTop:"15px",marginLeft:"50px"}} label={'Name of Donator'} id="margin-none" marginTop=""/>
+      <TextField sx={{marginTop:"15px",marginLeft:"50px"}} label={'Name of Donator'} id="margin-none" marginTop="" 
+      onChange={(e)=>setNameOfDonator((e.target.value))}/>
       
-      <TextField sx={{marginTop:"10px",marginLeft:"50px"}} label={'Name of Plant'} id="margin-dense" margin="dense" />
+      <TextField sx={{marginTop:"10px",marginLeft:"50px"}} label={'Name of Plant'} id="margin-dense" margin="dense" 
+      onChange={(e)=>setNameOfPlant((e.target.value))}/>
       
       
       <FormControl sx={{width:"594px",marginTop:"10px",marginLeft:"50px"}} >
@@ -69,11 +197,14 @@ const history = useHistory();
         </Select>
       </FormControl>
   
-      <TextField sx={{marginTop:"10px",marginLeft:"50px"}} label={'Quantity'} id="margin-normal" margin="normal" />
+      <TextField sx={{marginTop:"10px",marginLeft:"50px"}} label={'Quantity'} id="margin-normal" margin="normal" 
+      onChange={(e)=>setQuantity((e.target.value))}/>
 
-      <TextField sx={{marginTop:"10px",marginLeft:"50px"}} label={'Address'} id="margin-normal" margin="normal" />
+      <TextField sx={{marginTop:"10px",marginLeft:"50px"}} label={'Address'} id="margin-normal" margin="normal"
+      onChange={(e)=>setAddress((e.target.value))} />
 
-      <TextField sx={{marginTop:"10px",marginLeft:"50px"}} label={'Contact Number'} id="margin-normal" margin="normal" />
+      <TextField sx={{marginTop:"10px",marginLeft:"50px"}} label={'Contact Number'} id="margin-normal" margin="normal"
+      onChange={(e)=>setContactNumber((e.target.value))} />
       
       
       
@@ -82,7 +213,7 @@ const history = useHistory();
 
    
    </div>
-   <Button variant="success" style={{width:"300px",marginRight:"20px",backgroundColor:"#98F516",fontSize:"30px",opacity:"0.7"}}onClick={homepage} >Submit
+   <Button variant="success" style={{width:"300px",marginRight:"20px",backgroundColor:"#98F516",fontSize:"30px",opacity:"0.7"}}onClick={handleSubmit} >Submit
     </Button>
     
    
