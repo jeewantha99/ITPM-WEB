@@ -44,7 +44,6 @@ const history = useHistory();
 
 
     const handleSubmit = async (event) => {
-      event.preventDefault();
   
       var isSuccess = true;
   
@@ -116,26 +115,26 @@ const history = useHistory();
       }
   
       if (isSuccess ) {
-        // try {
-        //   const config = {
-        //     headers: {
-        //       "Content-type": "application/json",
-        //     },
-        //   };
-        //   const { data } = await axios.post(
-        //     "http://localhost:5000/api/shop/registerShop",
-        //     {
-        //       NameOfDonator,
-        //       NameOfPlant,
-        //       Category,
-        //       Quantity,
-        //       Address,
-        //       ContactNumber,
-        //     },
+        try {
+          const config = {
+            headers: {
+              "Content-type": "application/json",
+            },
+          };
+          const { data } = await axios.post(
+            "http://localhost:5000/api/donation/register",
+            {
+              NameOfDonator,
+              NameOfPlant,
+              Category,
+              Quantity,
+              Address,
+              ContactNumber,
+            },
   
-        //     config
-        //   );
-        //   console.log(data);
+            config
+          );
+          console.log(data);
   
   
           Swal.fire({
@@ -145,17 +144,17 @@ const history = useHistory();
             confirmButtonText: "Close",
           });
           history.push("/");
-        // } catch (error) {
-        //   Swal.fire({
-        //     icon: "error",
-        //     title: "Oops...",
-        //     text: error.response.data.error,
-        //     footer: '<a href="">Why do I have this issue?</a>',
-        //   });
+        } catch (error) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: error.response.data.error,
+            footer: '<a href="">Why do I have this issue?</a>',
+          });
   
-        //   console.log(`Error occured ${error.response.data.message}`);
-        //   console.log(error.response);
-        // }
+          console.log(`Error occured ${error}`);
+          console.log(error.response);
+        }
       }
     }
  
@@ -190,10 +189,10 @@ const history = useHistory();
           label="Age"
           onChange={(e)=>setCategory((e.target.value))}
         >
-          <MenuItem value={10}>Native</MenuItem>
-          <MenuItem value={20}>Outdoor</MenuItem>
-          <MenuItem value={30}>Indoor</MenuItem>
-          <MenuItem value={40}>Flower</MenuItem>
+          <MenuItem value={"Native"}>Native</MenuItem>
+          <MenuItem value={"Outdoor"}>Outdoor</MenuItem>
+          <MenuItem value={"Indoor"}>Indoor</MenuItem>
+          <MenuItem value={"Flower"}>Flower</MenuItem>
         </Select>
       </FormControl>
   

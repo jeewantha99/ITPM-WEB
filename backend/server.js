@@ -4,8 +4,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const app = express();
 require("dotenv").config({ path: "./config.env" });
-const userRoutes = require("./routes/userRoutes");
-const postRoutes = require("./routes/postRoute");
+const donationRoutes = require("./routes/donationRoutes");
 const { errorHandler, notFound } = require("./middleware/errorMiddleware");
 const mongoose = require("mongoose");
 
@@ -35,8 +34,8 @@ if (server) {
 }
 
 
-app.use("/api/user",userRoutes);
-app.use("/api/post", postRoutes);
+app.use("/api/donation",donationRoutes);
+// app.use("/api/post", postRoutes);
 
 app.use(errorHandler);
 app.use(notFound);

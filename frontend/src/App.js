@@ -1,8 +1,6 @@
 import "./App.css";
 import { Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/Authentication/LoginPage";
-import SignupPage from "./pages//Authentication/SignupPage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DonationForm from "./pages/DonationForm";
 import Admin from "./pages/Admin";
